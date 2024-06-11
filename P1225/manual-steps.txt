@@ -1,0 +1,10 @@
+1. Go to https://xtools.wmcloud.org/pages/www.wikidata.org/Garyh.stern/all
+2. Scroll down to bottom
+3. Click "23,978 others" at bottom of section "Pages created"
+4. Scroll down to "Pages created"
+5. Click "Download" > "CSV"
+6. Scroll down to bottom
+7. Click "Older 1000"
+8. Repeat steps 4 through 7 until end of list
+9. Combine downloaded CSV files
+10. Select unquoted "Page title" column values into "wikidata-Garyh.stern-ALL-ids.csv"
