@@ -13,7 +13,7 @@ with sys.stdin as infile:
         qid = obj['id']
         if 'en' in obj['descriptions']:
             desc = obj['descriptions']['en']['value']
-            
+
             startswith_label = False
             if 'en' in obj['labels'] and desc.startswith(obj['labels']['en']['value']):
                 startswith_label = True
@@ -22,9 +22,24 @@ with sys.stdin as infile:
             punct = desc[-1] in string.punctuation
             rr = '®' in desc
             tm = '™' in desc
+            extra_space = '  ' in desc
+            obit = 'Obituary' in desc
+            escape = '&amp;' in desc
+
             bad_starts = ('a ', 'an ', 'the ', 'A ', 'An ', 'The ', 'It ', 'is ', 'are ', 'was ', 'were ')
-            
-            if startswith_label and too_long and capped and punct:
+            starts_bad = False
+            for bs in bad_starts:
+                if desc.startswith(bs):
+                    starts_bad = True
+                    break
+
+            issues = (startswith_label, too_long, capped, punct, rr, tm, starts_bad, extra_space, obit, escape)
+            score = 0
+            threshold = 4
+
+            for i in issues:
+                if i:
+                    score += 1
+
+            if score >= threshold: #startswith_label and capped and punct:
                 print(qid, ' ' * (16 - len(qid)), desc)
-        
-            
