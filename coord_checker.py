@@ -20,3 +20,11 @@ def get_coords(item):
 def coords_in_country(coords, country):
     """given a set of coordinates and a country, return whether those coordinates are within that country"""
     pass
+
+def try_flip(coords, country):
+    """given a set of coordinates and a country, determine whether flipping them (N/S and/or E/W) puts them in the country of interest"""
+    pass
+
+def search_item_history(item):
+    """search item history for related problematic edits (e.g. coordinates or country changed)"""
+    pass
