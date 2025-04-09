@@ -2,12 +2,20 @@
 """script to check items with potentially bad coordinates"""
 
 import json
+import re
 
 items_url = 'https://www.wikidata.org/w/index.php?title=User:Pasleim/Implausible/coordinate&action=raw'
 
 def get_qids(wikitext):
     """given some wikitext, get the QIDs linked therein"""
-    pass
+    results = []
+    matches = re.findall(r'\[\[[^\]]*\]\]', wikitext)
+    for match in matches:
+        stripped = match.strip('[]')
+        if "|" in stripped:
+            stripped = stripped.split("|")[0]
+        results.append(stripped)
+    return results
 
 def get_items(qids):
     """given a list of QIDs, get the items"""
