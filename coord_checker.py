@@ -28,3 +28,9 @@ def try_flip(coords, country):
 def search_item_history(item):
     """search item history for related problematic edits (e.g. coordinates or country changed)"""
     pass
+
+country = '?'
+coords = (35.68, -105.96)
+
+if not coords_in_country(coords, country):
+    flipped = try_flip(coords, country)
