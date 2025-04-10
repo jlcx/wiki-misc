@@ -25,6 +25,7 @@ with sys.stdin as infile:
             extra_space = '  ' in desc
             obit = 'Obituary' in desc
             escape = '&amp;' in desc
+            space_comma = ' ,' in desc
 
             bad_starts = ('a ', 'an ', 'the ', 'A ', 'An ', 'The ', 'It ', 'is ', 'are ', 'was ', 'were ')
             starts_bad = False
@@ -33,7 +34,7 @@ with sys.stdin as infile:
                     starts_bad = True
                     break
 
-            issues = (startswith_label, too_long, capped, punct, rr, tm, starts_bad, extra_space, obit, escape)
+            issues = (startswith_label, too_long, capped, punct, rr, tm, starts_bad, extra_space, obit, escape, space_comma)
             score = 0
             threshold = 4
 
