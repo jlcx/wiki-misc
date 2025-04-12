@@ -37,6 +37,10 @@ def search_item_history(item):
     """search item history for related problematic edits (e.g. coordinates or country changed)"""
     pass
 
+def item_added_date(item):
+    """search history of items list and determine when the item was most recently added"""
+    pass
+
 country = '?'
 coords = (35.68, -105.96)
 
