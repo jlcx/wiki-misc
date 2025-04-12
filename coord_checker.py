@@ -25,6 +25,12 @@ def get_coords(item):
     """given item JSON, retrieve coordinates (P625) claims"""
     pass
 
+def get_wp_coords(sitelink):
+    """given a (probably) Wikipedia sitelink, get item coordinates from the article"""
+    # if they're the same, they may also need to be corrected
+    # if they're different, hopefully they are correct already
+    pass
+
 def coords_in_country(coords, country):
     """given a set of coordinates and a country, return whether those coordinates are within that country"""
     pass
