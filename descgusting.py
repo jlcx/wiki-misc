@@ -34,6 +34,13 @@ with sys.stdin as infile:
                     starts_bad = True
                     break
 
+            just_bad = ('Discover ', 'Enjoy ', 'Indulge ', 'Book ', 'Reserve ', 'Buy ', 'Get ', 'Hire ')
+            just_b_ad = False
+            for ad_bs in just_bad:
+                if ad_bs in desc:
+                    just_b_ad = True
+                    break
+
             issues = (startswith_label, too_long, capped, punct, rr, tm, starts_bad, extra_space, obit, escape, space_comma)
             score = 0
             threshold = 4
