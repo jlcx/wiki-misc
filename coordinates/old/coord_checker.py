@@ -46,9 +46,3 @@ def search_item_history(item):
 def item_added_date(item):
     """search history of items list and determine when the item was most recently added"""
     pass
-
-country = '?'
-coords = (35.68, -105.96)
-
-if not coords_in_country(coords, country):
-    flipped = try_flip(coords, country)
