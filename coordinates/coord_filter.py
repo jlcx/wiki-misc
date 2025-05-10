@@ -80,6 +80,15 @@ for i in items:
     if senegalese and hospital:
         # these were dealt with separately
         continue
+    try:
+        malaysian = 'P17' in items[i]['claims'] and items[i]['claims']['P17'][0]['mainsnak']['datavalue']['value']['id'] == 'Q833'
+        mosque = 'P31' in items[i]['claims'] and items[i]['claims']['P31'][0]['mainsnak']['datavalue']['value']['id'] == 'Q32815'
+    except Exception as e:
+        malaysian = False
+        mosque = False
+    if malaysian and mosque:
+        # these were dealt with separately
+        continue
     if 'P376' in items[i]['claims']:
         print(i, 'may not be on Earth...')
         continue
