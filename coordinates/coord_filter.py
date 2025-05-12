@@ -3,8 +3,6 @@ import time
 
 import urllib.request
 
-import reverse_geocoder as rg
-
 from collections import Counter
 
 wd_url = 'https://www.wikidata.org/wiki/'
@@ -67,7 +65,7 @@ def is_deprecated(obj):
     return False
 
 def is_flippable(obj):
-    #TODO implement using rg
+    #TODO implement
     return False
 
 for i in items:
