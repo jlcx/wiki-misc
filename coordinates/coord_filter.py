@@ -5,6 +5,19 @@ import urllib.request
 
 from collections import Counter
 
+# --- Geometry Libraries ---
+try:
+    import geopandas as gpd
+    from shapely.geometry import Point # Still need Point from shapely
+    from shapely.errors import ShapelyError
+except ImportError:
+    print("Error: Libraries 'geopandas' and 'shapely' are required.")
+    print("These libraries handle geographic data and shapes.")
+    print("Installation recommended via Conda: conda install geopandas")
+    print("Alternatively, using pip: pip install geopandas shapely")
+    print("(Pip installation might require additional system dependencies like GDAL/GEOS/PROJ)")
+    exit(1)
+
 wd_url = 'https://www.wikidata.org/wiki/'
 url_base = 'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&ids='
 
