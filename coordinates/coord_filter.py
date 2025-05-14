@@ -77,9 +77,21 @@ def is_deprecated(obj):
             return True
     return False
 
+def get_country_for_coords(lat, long):
+    pass
+
 def is_flippable(obj):
-    #TODO implement
-    return False
+    try:
+        country = obj['claims']['P17'][0]['mainsnak']['datavalue']['value']['id']
+        # TODO finish
+        lat, long = 0, 0 # TODO fix
+        switched = get_country_for_coords(long, lat)
+        eq_flip = get_country_for_coords(-lat, long)
+        pm_flip = get_country_for_coords(lat, -long)
+        double_flip = get_country_for_coords(-lat, -long)
+        return False
+    except KeyError:
+        return False
 
 for i in items:
     try:
