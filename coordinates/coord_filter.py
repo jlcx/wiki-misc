@@ -67,6 +67,10 @@ def is_filtered_type(obj):
         return False
 
 def is_deprecated(obj):
+    """
+    Returns True if any potentially conflicting claims are marked deprecated.
+    """
+    # TODO Don't return True unless ignoring the specific deprecated claim actually removes the conflict
     if 'P17' in obj['claims']:
         p17_ranks = [c['rank'] for c in obj['claims']['P17']]
         if 'deprecated' in p17_ranks:
@@ -83,12 +87,19 @@ def get_country_for_coords(lat, long):
 def is_flippable(obj):
     try:
         country = obj['claims']['P17'][0]['mainsnak']['datavalue']['value']['id']
+        coords_claims = obj['claims']['P625']
         # TODO finish
-        lat, long = 0, 0 # TODO fix
-        switched = get_country_for_coords(long, lat)
-        eq_flip = get_country_for_coords(-lat, long)
-        pm_flip = get_country_for_coords(lat, -long)
-        double_flip = get_country_for_coords(-lat, -long)
+        for cc in coords_claims:
+            lat, long = cc['mainsnak']['datavalue']['value']['latitude'], cc['mainsnak']['datavalue']['value']['longitude']
+            orig = get_country_for_coords(lat, long)
+            eq_flip = get_country_for_coords(-lat, long)
+            pm_flip = get_country_for_coords(lat, -long)
+            double_flip = get_country_for_coords(-lat, -long)
+            switched = get_country_for_coords(long, lat)
+            eq_flip_switched = get_country_for_coords(-long, lat)
+            pm_flip_switched = get_country_for_coords(long, -lat)
+            double_flip_switched = get_country_for_coords(-long, -lat)
+            # Whew; should I loop through these cases?  Also, feeling like knight moves in chess.
         return False
     except KeyError:
         return False
