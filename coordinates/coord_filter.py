@@ -86,20 +86,18 @@ def get_country_for_coords(lat, long):
 
 def is_flippable(obj):
     try:
-        country = obj['claims']['P17'][0]['mainsnak']['datavalue']['value']['id']
+        claimed_country = obj['claims']['P17'][0]['mainsnak']['datavalue']['value']['id']
         coords_claims = obj['claims']['P625']
         # TODO finish
         for cc in coords_claims:
             lat, long = cc['mainsnak']['datavalue']['value']['latitude'], cc['mainsnak']['datavalue']['value']['longitude']
-            orig = get_country_for_coords(lat, long)
-            eq_flip = get_country_for_coords(-lat, long)
-            pm_flip = get_country_for_coords(lat, -long)
-            double_flip = get_country_for_coords(-lat, -long)
-            switched = get_country_for_coords(long, lat)
-            eq_flip_switched = get_country_for_coords(-long, lat)
-            pm_flip_switched = get_country_for_coords(long, -lat)
-            double_flip_switched = get_country_for_coords(-long, -lat)
-            # Whew; should I loop through these cases?  Also, feeling like knight moves in chess.
+            flips = [(lat, long), (-lat, long), (lat, -long), (-lat, -long), (long, lat), (-long, lat), (long, -lat), (-long, -lat)]
+            for flip in flips:
+                coords_country = get_country_for_coords(*flip)
+                if coords_country == claimed_country:
+                    print(flip, 'puts coordinates in claimed country!')
+                else:
+                    print(flip, 'does not put coords in claimed country')
         return False
     except KeyError:
         return False
