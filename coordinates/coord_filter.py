@@ -84,10 +84,11 @@ def is_deprecated(obj):
 def get_country_for_coords(lat, long):
     pass
 
-def is_flippable(obj):
+def workable_flips(obj):
     try:
         claimed_country = obj['claims']['P17'][0]['mainsnak']['datavalue']['value']['id']
         coords_claims = obj['claims']['P625']
+        workable_flips = []
         # TODO finish
         for cc in coords_claims:
             lat, long = cc['mainsnak']['datavalue']['value']['latitude'], cc['mainsnak']['datavalue']['value']['longitude']
@@ -96,11 +97,15 @@ def is_flippable(obj):
                 coords_country = get_country_for_coords(*flip)
                 if coords_country == claimed_country:
                     print(flip, 'puts coordinates in claimed country!')
+                    workable_flips.append(flip)
                 else:
                     print(flip, 'does not put coords in claimed country')
-        return False
+        if len(workable_flips) > 0:
+            return workable_flips
+        else:
+            return None
     except KeyError:
-        return False
+        return None
 
 for i in items:
     try:
@@ -133,7 +138,7 @@ for i in items:
     elif is_deprecated(items[i]):
         deprecated_count += 1
         continue
-    elif is_flippable(items[i]):
+    elif workable_flips(items[i]):
         flippable.append(i)
     else:
         other.append(i)
