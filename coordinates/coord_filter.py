@@ -108,24 +108,24 @@ def workable_flips(obj):
         return None
 
 for i in items:
-    try:
-        senegalese = 'P17' in items[i]['claims'] and items[i]['claims']['P17'][0]['mainsnak']['datavalue']['value']['id'] == 'Q1041'
-        hospital = 'P31' in items[i]['claims'] and items[i]['claims']['P31'][0]['mainsnak']['datavalue']['value']['id'] == 'Q16917'
-    except Exception as e:
-        senegalese = False
-        hospital = False
-    if senegalese and hospital:
-        # these were dealt with separately
-        continue
-    try:
-        malaysian = 'P17' in items[i]['claims'] and items[i]['claims']['P17'][0]['mainsnak']['datavalue']['value']['id'] == 'Q833'
-        mosque = 'P31' in items[i]['claims'] and items[i]['claims']['P31'][0]['mainsnak']['datavalue']['value']['id'] == 'Q32815'
-    except Exception as e:
-        malaysian = False
-        mosque = False
-    if malaysian and mosque:
-        # these were dealt with separately
-        continue
+    # try:
+    #     senegalese = 'P17' in items[i]['claims'] and items[i]['claims']['P17'][0]['mainsnak']['datavalue']['value']['id'] == 'Q1041'
+    #     hospital = 'P31' in items[i]['claims'] and items[i]['claims']['P31'][0]['mainsnak']['datavalue']['value']['id'] == 'Q16917'
+    # except Exception as e:
+    #     senegalese = False
+    #     hospital = False
+    # if senegalese and hospital:
+    #     # these were dealt with separately
+    #     continue
+    # try:
+    #     malaysian = 'P17' in items[i]['claims'] and items[i]['claims']['P17'][0]['mainsnak']['datavalue']['value']['id'] == 'Q833'
+    #     mosque = 'P31' in items[i]['claims'] and items[i]['claims']['P31'][0]['mainsnak']['datavalue']['value']['id'] == 'Q32815'
+    # except Exception as e:
+    #     malaysian = False
+    #     mosque = False
+    # if malaysian and mosque:
+    #     # these were dealt with separately
+    #     continue
     if 'P376' in items[i]['claims']:
         print(i, 'may not be on Earth...')
         continue
@@ -158,20 +158,3 @@ print(type_dict)
 type_json = get_entities(type_dict.keys())
 for i in type_json:
     print(i,' ' * (24 - len(i)),type_json[i]['labels']['en']['value'])
-
-# senegalese_hospital_count = 0
-# s_h_exceptions = []
-
-# for i in other:
-#     try:
-#         senegalese = 'P17' in items[i]['claims'] and items[i]['claims']['P17'][0]['mainsnak']['datavalue']['value']['id'] == 'Q1041'
-#         hospital = 'P31' in items[i]['claims'] and items[i]['claims']['P31'][0]['mainsnak']['datavalue']['value']['id'] == 'Q16917'
-#         if senegalese and hospital:
-#             senegalese_hospital_count += 1
-#             print(i)
-#     except Exception as e:
-#         s_h_exceptions.append((i, e))
-
-# print(senegalese_hospital_count, 'Senegalese hospitals')
-
-# print(s_h_exceptions)
