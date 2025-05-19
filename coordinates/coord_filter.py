@@ -108,24 +108,6 @@ def workable_flips(obj):
         return None
 
 for i in items:
-    # try:
-    #     senegalese = 'P17' in items[i]['claims'] and items[i]['claims']['P17'][0]['mainsnak']['datavalue']['value']['id'] == 'Q1041'
-    #     hospital = 'P31' in items[i]['claims'] and items[i]['claims']['P31'][0]['mainsnak']['datavalue']['value']['id'] == 'Q16917'
-    # except Exception as e:
-    #     senegalese = False
-    #     hospital = False
-    # if senegalese and hospital:
-    #     # these were dealt with separately
-    #     continue
-    # try:
-    #     malaysian = 'P17' in items[i]['claims'] and items[i]['claims']['P17'][0]['mainsnak']['datavalue']['value']['id'] == 'Q833'
-    #     mosque = 'P31' in items[i]['claims'] and items[i]['claims']['P31'][0]['mainsnak']['datavalue']['value']['id'] == 'Q32815'
-    # except Exception as e:
-    #     malaysian = False
-    #     mosque = False
-    # if malaysian and mosque:
-    #     # these were dealt with separately
-    #     continue
     if 'P376' in items[i]['claims']:
         print(i, 'may not be on Earth...')
         continue
