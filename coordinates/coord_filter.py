@@ -54,7 +54,7 @@ deprecated_count = 0
 unfiltered_counter = Counter()
 
 # items not filtered will go into one of these, depending on whether flipping coordinates resolves the issue
-flippable = []
+flippable = {}
 other = []
 
 def is_filtered_type(obj):
@@ -108,6 +108,8 @@ def workable_flips(obj):
         return None
 
 for i in items:
+    wf = workable_flips(items[i])
+
     if 'P376' in items[i]['claims']:
         print(i, 'may not be on Earth...')
         continue
@@ -120,8 +122,8 @@ for i in items:
     elif is_deprecated(items[i]):
         deprecated_count += 1
         continue
-    elif workable_flips(items[i]):
-        flippable.append(i)
+    elif wf:
+        flippable[i] = wf
     else:
         other.append(i)
 
