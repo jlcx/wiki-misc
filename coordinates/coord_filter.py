@@ -134,7 +134,8 @@ for i in flippable:
 print(f"Other: ({len(other)}):")
 for i in other:
     print(wd_url + i)
-print(f"Other: ({len(other)})")
+
+print(f"Filtered: {filtered_count}, Deprecated: {deprecated_count}, Flippable: {len(flippable)}, Other: {len(other)}")
 
 mc50 = unfiltered_counter.most_common()[:50]
 type_dict = {t[0]: t[1] for t in mc50}
