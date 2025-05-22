@@ -107,39 +107,40 @@ def workable_flips(obj):
     except KeyError:
         return None
 
-for i in items:
-    wf = workable_flips(items[i])
+if __name__ == "__main__":
+    for i in items:
+        wf = workable_flips(items[i])
 
-    if 'P376' in items[i]['claims']:
-        print(i, 'may not be on Earth...')
-        continue
-    if 'P30' in items[i]['claims'] and items[i]['claims']['P30'][0]['mainsnak']['datavalue']['value']['id'] == 'Q51':
-        print(i, 'is in Antarctica')
-        continue
-    if is_filtered_type(items[i]):
-        filtered_count += 1
-        continue
-    elif is_deprecated(items[i]):
-        deprecated_count += 1
-        continue
-    elif wf:
-        flippable[i] = wf
-    else:
-        other.append(i)
+        if 'P376' in items[i]['claims']:
+            print(i, 'may not be on Earth...')
+            continue
+        if 'P30' in items[i]['claims'] and items[i]['claims']['P30'][0]['mainsnak']['datavalue']['value']['id'] == 'Q51':
+            print(i, 'is in Antarctica')
+            continue
+        if is_filtered_type(items[i]):
+            filtered_count += 1
+            continue
+        elif is_deprecated(items[i]):
+            deprecated_count += 1
+            continue
+        elif wf:
+            flippable[i] = wf
+        else:
+            other.append(i)
 
-print('Flippable:')
-for i in flippable:
-    print(wd_url + i)
+    print('Flippable:')
+    for i in flippable:
+        print(wd_url + i)
 
-print(f"Other: ({len(other)}):")
-for i in other:
-    print(wd_url + i)
+    print(f"Other: ({len(other)}):")
+    for i in other:
+        print(wd_url + i)
 
-print(f"Filtered: {filtered_count}, Deprecated: {deprecated_count}, Flippable: {len(flippable)}, Other: {len(other)}")
+    print(f"Filtered: {filtered_count}, Deprecated: {deprecated_count}, Flippable: {len(flippable)}, Other: {len(other)}")
 
-mc50 = unfiltered_counter.most_common()[:50]
-type_dict = {t[0]: t[1] for t in mc50}
-print(type_dict)
-type_json = get_entities(type_dict.keys())
-for i in type_json:
-    print(i,' ' * (24 - len(i)),type_json[i]['labels']['en']['value'])
+    mc50 = unfiltered_counter.most_common()[:50]
+    type_dict = {t[0]: t[1] for t in mc50}
+    print(type_dict)
+    type_json = get_entities(type_dict.keys())
+    for i in type_json:
+        print(i,' ' * (24 - len(i)),type_json[i]['labels']['en']['value'])
