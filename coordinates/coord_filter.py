@@ -26,10 +26,21 @@ def get_entities(query_ids):
     ids_joined = '|'.join(query_ids)
     req = urllib.request.Request(url_base + ids_joined)
     req.add_header('User-Agent', 'CoordinateFilter/0.1 (https://www.wikidata.org/wiki/User:Jamie7687)')
-    # req.add_header('Accept-Encoding', 'gzip')
+    req.add_header('Accept-Encoding', 'gzip,deflate')
     time.sleep(1)
     result = urllib.request.urlopen(req)
-    result_json = json.loads(result.read())
+
+    content_encoding = result.info().get('Content-Encoding')
+    if content_encoding == 'gzip':
+        import gzip
+        data = gzip.decompress(result.read())
+    elif content_encoding == 'deflate':
+        import zlib
+        data = zlib.decompress(result.read(), -zlib.MAX_WBITS) # Negative WBITS for raw deflate
+    else:
+        data = result.read()
+
+    result_json = json.loads(data.decode('utf-8')) # Decode bytes to string before loading JSON
     if result_json['success'] == 1:
         return result_json['entities']
     else:
